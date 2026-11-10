@@ -1,0 +1,210 @@
+void main() {
+  print('PART 1: DART FUNDAMENTALS');
+
+  int ticketId = 2501;
+  String studentName = 'Jonathan';
+  String serviceType = 'Printer Repair';
+  double repairCost = 1200.00;
+  bool isPriority = true;
+
+  double totalAmount = repairCost + 300.00;
+  bool isHighCost = totalAmount > 1000.00;
+
+  print('Ticket ID: $ticketId');
+  print('Student Name: $studentName');
+  print('Service Type: $serviceType');
+  print('Repair Cost: PHP $repairCost');
+  print('Priority: $isPriority');
+  print('Total Amount: PHP $totalAmount');
+  print('High Cost: $isHighCost');
+
+  print('\nSecond Ticket:');
+  print('Ticket ID: 2502');
+  print('Student Name: Mark');
+  print('Service Type: Computer Cleaning');
+  print('Repair Cost: PHP 450.00');
+  print('Priority: false');
+}
+
+
+
+
+String checkPriority(bool priority) {
+  if (priority) {
+    return 'High Priority';
+  } else {
+    return 'Regular Priority';
+  }
+}
+
+void main() {
+  print('PART 2: PROGRAM LOGIC');
+
+  List<bool> tickets = [false, true, false, true];
+
+  for (int i = 0; i < tickets.length; i++) {
+    String status = checkPriority(tickets[i]);
+
+    print('Ticket ${i + 1}: $status');
+  }
+
+  print('\nERROR HANDLING');
+
+  try {
+    int ticketNumber = int.parse('XYZ');
+    print(ticketNumber);
+  } catch (e) {
+    print('Invalid ticket number. Please enter numbers only.');
+  }
+}
+
+
+
+
+class ServiceTicket {
+  int ticketId;
+  String studentName;
+  String problem;
+  double cost;
+
+  String _progress = 'Waiting';
+
+  ServiceTicket(
+    this.ticketId,
+    this.studentName,
+    this.problem,
+    this.cost,
+  );
+
+  String get progress => _progress;
+
+  void changeProgress(String newProgress) {
+    _progress = newProgress;
+  }
+
+  void showDetails() {
+    print('Ticket ID: $ticketId');
+    print('Student: $studentName');
+    print('Problem: $problem');
+    print('Cost: PHP $cost');
+    print('Progress: $progress');
+  }
+}
+
+void main() {
+  print('PART 3: OBJECT-ORIENTED PROGRAMMING');
+
+  ServiceTicket ticket1 =
+      ServiceTicket(3001, 'Jonathan Delave', 'Keyboard Problem', 500.00);
+
+  ServiceTicket ticket2 =
+      ServiceTicket(3002, 'Meg Madrid', 'Monitor Repair', 1800.00);
+
+  ServiceTicket ticket3 =
+      ServiceTicket(3003, 'Abram Madrid', 'Slow Computer', 750.00);
+
+  ticket1.changeProgress('In Progress');
+  ticket2.changeProgress('Completed');
+
+  List<ServiceTicket> ticketList = [
+    ticket1,
+    ticket2,
+    ticket3
+  ];
+
+  for (var ticket in ticketList) {
+    ticket.showDetails();
+    print('');
+  }
+
+  Map<String, String> schoolInfo = {
+    'Department': 'Computer Laboratory',
+    'Service': 'Technical Support',
+    'Location': 'Room 201'
+  };
+
+  print('SCHOOL INFORMATION');
+
+  schoolInfo.forEach((key, value) {
+    print('$key: $value');
+  });
+}
+
+
+
+
+mixin ActivityLogger {
+  void recordActivity(String message) {
+    print('[ACTIVITY] $message');
+  }
+}
+
+abstract class TechnicalService {
+  void performService();
+}
+
+class ComputerRepair extends TechnicalService
+    with ActivityLogger {
+
+  @override
+  void performService() {
+    print('Service: Fixing a computer problem.');
+    recordActivity('Computer repair has been recorded.');
+  }
+}
+
+class PrinterRepair extends TechnicalService
+    with ActivityLogger {
+
+  @override
+  void performService() {
+    print('Service: Fixing a printer problem.');
+    recordActivity('Printer repair has been recorded.');
+  }
+}
+
+void main() {
+  print('PART 4: INHERITANCE AND POLYMORPHISM');
+
+  List<TechnicalService> services = [
+    ComputerRepair(),
+    PrinterRepair()
+  ];
+
+  for (var service in services) {
+    service.performService();
+    print('');
+  }
+}
+
+
+
+
+
+import 'dart:async';
+
+class TicketSaver {
+  Future<String> saveTicket() async {
+    await Future.delayed(Duration(seconds: 3));
+
+    return 'Technical support ticket saved!';
+  }
+}
+
+Future<void> main() async {
+  print('PART 5: ASYNCHRONOUS PROGRAMMING');
+
+  TicketSaver saver = TicketSaver();
+
+  print('Processing ticket...');
+
+  Timer(Duration(seconds: 1), () {
+    print('Timer: Checking ticket information...');
+  });
+
+  String message = await saver.saveTicket();
+
+  print(message);
+  print('All tasks are completed!');
+}
+
